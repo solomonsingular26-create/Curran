@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curran Theatre — Scope of Work</title>
+<style>
+:root{
+  --sb-primary:#003C5A; --sb-primary-2:#00293d; --sb-deep:#001a28; --sb-secondary:#EAAB1F;
+  --sb-text:#000; --sb-muted:#505050; --sb-bg:#fff; --sb-bg-2:#FDFDFC; --sb-bg-3:#F2EFE7;
+  --line:#dcd9d0;
+  --ok:#16a34a; --no:#dc2626; --hold:#d97706;
+  --sb-font:"Aptos Narrow","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{font-family:var(--sb-font);color:var(--sb-text);background:var(--sb-bg-3);margin:0;line-height:1.45}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+/* ---------- masthead (Alternates-Log style: navy band, wordmark, gold eyebrow) ---------- */
+.masthead{background:var(--sb-primary);color:#fff;padding:34px 0 26px}
+.mast-top{display:flex;align-items:center;gap:26px}
+.wordmark{flex:none;text-align:left}
+.wm1{font-size:33px;font-weight:800;letter-spacing:4px;color:#fff;line-height:1;font-family:"Arial Black","Aptos Narrow",sans-serif}
+.wm1 .g1{color:var(--sb-secondary)}
+.wm2{font-size:13.5px;font-weight:600;letter-spacing:10.5px;color:#fff;margin-top:6px;padding-left:2px}
+.vline{width:1px;align-self:stretch;background:rgba(255,255,255,.28);flex:none}
+.mast-title{min-width:0}
+.eyebrow{color:var(--sb-secondary);font-size:12px;font-weight:800;letter-spacing:3.2px;text-transform:uppercase}
+.masthead h1{font-size:34px;margin:8px 0 0;font-weight:600;color:#fff;letter-spacing:.3px}
+.lede{color:#c3cfd8;font-style:italic;font-size:16.5px;margin:26px 0 0}
+.metarow{display:flex;flex-wrap:wrap;gap:9px 44px;margin:22px 0 2px;font-size:13px}
+.metarow .ml{color:var(--sb-secondary);font-weight:800;letter-spacing:1.6px;text-transform:uppercase;font-size:12px}
+.metarow .mv{color:#dfe8ee;margin-left:8px;letter-spacing:1.2px;text-transform:uppercase}
+.gold-rule{height:3px;background:var(--sb-secondary);width:100%}
+
+/* ---------- stat band (dark, between gold rules) ---------- */
+.statband{background:var(--sb-primary-2);color:#fff;padding:22px 0 18px}
+.statgrid{display:flex}
+.stat{flex:1;text-align:center;padding:0 18px;border-left:1px solid rgba(255,255,255,.16)}
+.stat:first-child{border-left:none}
+.stat .sl{font-size:11px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:#9fb4c0}
+.stat .sv{font-size:31px;font-weight:700;color:#fff;margin:9px 0 7px;line-height:1}
+.stat .sv.dim{color:#7d93a0}
+.stat .sv.warn{color:#c4b5fd}
+.stat .sv.ok{color:#86efac}
+.stat .ss{font-size:11.5px;color:#9fb4c0}
+
+/* ---------- tab bar + toolbars (sticky) ---------- */
+.sticky{position:sticky;top:0;z-index:50;background:var(--sb-primary-2);box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.tabbar{display:flex;gap:0;align-items:stretch}
+.tabbar button{background:transparent;border:none;color:#9fc0d0;font-family:var(--sb-font);font-size:14px;font-weight:800;letter-spacing:.4px;padding:14px 22px;cursor:pointer;border-bottom:3px solid transparent;display:flex;align-items:center;gap:9px}
+.tabbar button .ct{background:rgba(255,255,255,.14);color:#fff;font-size:11px;font-weight:800;border-radius:11px;padding:2px 9px}
+.tabbar button:hover{color:#fff}
+.tabbar button.on{color:#fff;border-bottom-color:var(--sb-secondary)}
+.tabbar button.on .ct{background:var(--sb-secondary);color:#3a2c00}
+.toolbar{border-top:1px solid #0a3a4f;display:none;padding:10px 0}
+.toolbar.on{display:block}
+.toolbar .wrap{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.toolbar input[type=search],.toolbar select{font-family:var(--sb-font);font-size:13px;border:1px solid #16465c;background:#063246;color:#fff;border-radius:7px;padding:8px 10px}
+.toolbar input[type=search]{min-width:210px}
+.toolbar label{color:#9fc0d0;font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
+.spacer{flex:1}
+.btn{background:var(--sb-secondary);color:#3a2c00;border:none;border-radius:7px;padding:9px 13px;font-family:var(--sb-font);font-size:12.5px;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:#cfe0e8;border:1px solid #2c6a86}
+.btn:hover{filter:brightness(1.05)}
+.saved{color:#7fe3a4;font-size:12px;font-weight:600;opacity:0;transition:opacity .3s}
+.saved.show{opacity:1}
+
+main{padding:20px 0 110px}
+.tabpane{display:none}.tabpane.on{display:block}
+
+/* ---------- scope: level groups ---------- */
+.level{margin:0 0 20px;border-radius:12px;box-shadow:0 2px 10px rgba(0,40,60,.06)}
+.level-h{display:flex;align-items:center;gap:11px;background:var(--sb-primary);color:#fff;padding:12px 18px;border-radius:12px 12px 0 0;cursor:pointer;user-select:none}
+.level-h .chev{transition:transform .2s;font-size:13px;color:var(--sb-secondary)}
+.level.collapsed .chev{transform:rotate(-90deg)}
+.level-h .name{font-size:15.5px;font-weight:800;letter-spacing:.3px}
+.level-h .meta{font-size:12px;color:#aebfc9}
+.level-h .lp{margin-left:auto;display:flex;gap:6px}
+.lp .pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:11px;background:rgba(255,255,255,.14);color:#fff}
+.level-body{background:#fff;border:1px solid var(--line);border-top:none;border-radius:0 0 12px 12px;padding:6px 0 2px}
+.level.collapsed .level-body{display:none}
+.div-h{display:flex;align-items:center;gap:9px;padding:12px 18px 6px;border-top:1px solid #f0eee7}
+.level-body>.div-group:first-child .div-h{border-top:none}
+.div-h .code{font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--sb-muted);background:var(--sb-bg-3);padding:3px 9px;border-radius:5px}
+.div-h .dname{font-size:12.5px;font-weight:700;color:var(--sb-primary);text-transform:uppercase;letter-spacing:.4px}
+.item{display:flex;margin:7px 18px;border:1px solid var(--line);border-radius:10px;background:var(--sb-bg-2);overflow:hidden;border-left:5px solid var(--line);transition:border-color .2s}
+.item[data-d="accept"]{border-left-color:var(--ok)} .item[data-d="reject"]{border-left-color:var(--no)} .item[data-d="hold"]{border-left-color:var(--hold)}
+.item[data-d="conflict"]{border-left-color:#7c3aed}
+.item[data-d="partial"]{border-left-color:#64748b}
+.item .mn{flex:1;padding:12px 14px;min-width:0}
+.item .side{width:340px;border-left:1px solid #efece4;padding:12px 14px;background:#fff;display:flex;flex-direction:column;gap:10px}
+.tagrow{display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+.tag{font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:11px;color:#fff}
+.tag.dv{background:var(--sb-primary)}
+.tag.no{background:#e7f0f4;color:#13303f}
+.tag.done{background:#16a34a}
+.desc{font-size:13.5px;color:#13303f;font-weight:600;outline:none}
+.desc[contenteditable]:focus{background:#fffef5;box-shadow:0 0 0 2px #fde68a;border-radius:4px}
+.locrow{margin-top:6px;font-size:12px;color:var(--sb-muted)}
+.locrow .ll{color:var(--sb-secondary);font-weight:800;text-transform:uppercase;font-size:10px;letter-spacing:.6px;margin-right:6px}
+.locrow .lv2{outline:none;display:inline}
+.locrow .lv2[contenteditable]:focus{background:#fffef5;box-shadow:0 0 0 2px #fde68a;border-radius:4px;padding:1px 3px}
+.src{margin-top:6px}
+.src summary{cursor:pointer;color:var(--sb-muted);font-size:11.5px;list-style:none}
+.src summary::-webkit-details-marker{display:none}
+.src summary:before{content:"▸ basis / source";color:var(--sb-secondary);font-weight:700}
+.src[open] summary:before{content:"▾ basis / source"}
+.src .why{color:var(--sb-muted);font-size:12px;margin-top:5px;outline:none}
+.src .why[contenteditable]:focus{background:#fffef5;box-shadow:0 0 0 2px #fde68a;border-radius:4px;padding:2px}
+.snrow{margin-top:8px;font-size:12px;color:#13303f;background:#f6f4ec;border:1px solid #ece8da;border-radius:7px;padding:6px 9px}
+.snrow .ll{color:var(--sb-primary);font-weight:800;text-transform:uppercase;font-size:10px;letter-spacing:.6px;margin-right:6px}
+.snrow .sv2{outline:none;display:inline}
+.snrow .sv2[contenteditable]:focus{background:#fffef5;box-shadow:0 0 0 2px #fde68a;border-radius:4px;padding:1px 3px}
+.rowtools{display:flex;gap:9px;margin-top:8px}
+.lnk{font-size:11px;font-weight:700;color:var(--sb-muted);background:none;border:none;cursor:pointer;padding:0;text-decoration:underline}
+.lnk.del{color:var(--no)}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{flex:1;border:none;background:#fff;font-family:var(--sb-font);font-size:11.5px;font-weight:800;padding:8px 4px;cursor:pointer;color:var(--sb-muted);border-right:1px solid var(--line)}
+.seg button:last-child{border-right:none}
+.seg button.on.accept{background:var(--ok);color:#fff} .seg button.on.reject{background:var(--no);color:#fff} .seg button.on.hold{background:var(--hold);color:#fff}
+.side .nlab{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--sb-muted);font-weight:700}
+.dec-block{display:flex;flex-direction:column;gap:5px}
+.dec-block .nlab2{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--sb-muted);font-weight:800}
+.stamp{font-size:10.5px;color:var(--sb-muted)}
+textarea.notes{width:100%;min-height:40px;font-family:var(--sb-font);font-size:12.5px;border:1px solid var(--line);border-radius:7px;padding:7px 8px;resize:vertical;background:var(--sb-bg-2)}
+textarea.notes:focus{outline:2px solid #cfe0e8;background:#fff}
+.add-here{margin:4px 18px 12px}
+.add-here button{background:#fff;border:1px dashed var(--sb-muted);color:var(--sb-muted);border-radius:8px;padding:7px 13px;font-family:var(--sb-font);font-size:12px;font-weight:700;cursor:pointer}
+.add-here button:hover{border-color:var(--sb-primary);color:var(--sb-primary)}
+
+.hide{display:none !important}
+footer{color:var(--sb-muted);font-size:11.5px;padding:16px 0;border-top:2px solid #fff;margin-top:10px}
+
+/* ---------- modal ---------- */
+.modal-bg{position:fixed;inset:0;background:rgba(0,30,45,.55);display:none;align-items:flex-start;justify-content:center;z-index:90;padding:40px 16px;overflow:auto}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:14px;max-width:560px;width:100%;padding:22px 22px 20px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.modal h3{margin:0 0 4px;color:var(--sb-primary);font-size:18px}
+.modal p.h{margin:0 0 16px;color:var(--sb-muted);font-size:12.5px}
+.fld{margin-bottom:13px}
+.fld label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--sb-muted);font-weight:700;margin-bottom:4px}
+.fld input,.fld select,.fld textarea{width:100%;font-family:var(--sb-font);font-size:13px;border:1px solid var(--line);border-radius:7px;padding:8px 9px}
+.fld textarea{min-height:54px;resize:vertical}
+.two{display:flex;gap:10px}.two .fld{flex:1}
+.modal-foot{display:flex;justify-content:flex-end;gap:9px;margin-top:6px}
+@media (max-width:860px){
+  .item{flex-direction:column}.item .side{width:auto;border-left:none;border-top:1px solid #efece4}
+  .masthead h1{font-size:23px}.wm1{font-size:24px}.wm2{font-size:10px;letter-spacing:7px}
+  .mast-top{gap:16px}.statgrid{flex-wrap:wrap}.stat{flex:1 1 40%;margin-bottom:12px}
+}
+@media print{
+  .sticky,.btn,.add-here,.rowtools,.modal-bg,#connBanner{display:none !important}
+  body{background:#fff}.tabpane{display:block !important}
+  .masthead{background:#fff;border-bottom:3px solid var(--sb-secondary);color:#000}
+  .masthead h1,.wm1{color:#000}.wm1 .g1{color:#a9750c}.wm2{color:#000}.eyebrow{color:#a9750c}
+  .lede,.metarow .mv{color:#333}.vline{background:#ccc}
+  .statband{background:#fff;color:#000}.stat .sv{color:#000}.stat .sl,.stat .ss{color:#555}
+  .src,.basis{display:none}textarea.notes,textarea.resp{border:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ MASTHEAD ============ -->
+<div class="masthead"><div class="wrap">
+    <div class="mast-top">
+      <div class="wordmark"><div class="wm1">S<span class="g1">1</span>NGULAR</div><div class="wm2">BUILDERS</div></div>
+      <div class="vline"></div>
+      <div class="mast-title">
+        <div class="eyebrow">Scope of Work · Estimate #1.0 · Issued 06/12/2026</div>
+        <h1>Curran Theatre Restoration</h1>
+      </div>
+    </div>
+    <div class="lede">Client and Architect each record a decision on every scope item — every change syncs live for the whole team</div>
+    <div class="metarow">
+      <span><span class="ml">Scope basis</span><span class="mv">Scope of Work Matrix 4 · 06/12/2026</span></span>
+      <span><span class="ml">Location</span><span class="mv">445 Geary St, San Francisco</span></span>
+      <span><span class="ml">Levels</span><span class="mv">5</span></span>
+      <span><span class="ml">Total scope items</span><span class="mv" id="mTotal">150</span></span>
+    </div>
+  </div></div>
+<div class="gold-rule"></div>
+<div class="statband"><div class="wrap statgrid">
+  <div class="stat"><div class="sl">Scope Items</div><div class="sv" id="stItems">150</div><div class="ss" id="stItemsSub">across 5 levels</div></div>
+  <div class="stat"><div class="sl">Both Agree</div><div class="sv ok" id="stAgree">0</div><div class="ss">client &amp; architect aligned</div></div>
+  <div class="stat"><div class="sl">Conflicts</div><div class="sv warn" id="stConf">0</div><div class="ss">decisions disagree</div></div>
+  <div class="stat"><div class="sl">Undecided</div><div class="sv dim" id="stUnd">150</div><div class="ss">awaiting both decisions</div></div>
+</div></div>
+<div class="gold-rule"></div>
+<div id="connBanner" style="padding:8px 0;font-size:12.5px;background:#fffbe9;color:#6b5300;border-bottom:1px solid #f0e2b6"><div class="wrap" id="connMsg">Connecting…</div></div>
+
+<!-- ============ STICKY TABS + TOOLBARS ============ -->
+<div class="sticky">
+  <!-- scope toolbar -->
+  <div class="toolbar on" id="toolScope"><div class="wrap">
+    <input id="q" type="search" placeholder="Search scope, item no., location, source…">
+    <label>Division</label>
+    <select id="ftype"><option value="">All divisions</option></select>
+    <label>Status</label>
+    <select id="fdec"><option value="">All</option><option value="conflict">Conflicts</option><option value="undecided">Neither decided</option><option value="agreed">Both agree</option><option value="completed">Completed</option></select>
+    <label>Your initials</label>
+    <input id="initials" type="text" maxlength="6" placeholder="e.g. JS" style="font-family:var(--sb-font);font-size:13px;border:1px solid #16465c;background:#063246;color:#fff;border-radius:7px;padding:8px 10px;width:88px">
+    <span class="spacer"></span>
+    <span id="saved" class="saved">Saved ✓</span>
+    <button class="btn" onclick="openAdd()">+ Add scope item</button>
+    <button class="btn ghost" onclick="exportCSV()">Export CSV</button>
+    <button class="btn ghost" onclick="window.print()">Print / PDF</button>
+    <button class="btn ghost" onclick="reloadData()">Reload</button>
+  </div></div>
+</div></div>
+</div>
+
+<main class="wrap">
+  <section class="tabpane on" id="paneScope">
+    <div id="groups"></div>
+  </section>
+Singular Builders · Curran Theatre Restoration · 445 Geary Street, San Francisco · Scope basis: Restoration Scope of Work Matrix 4, issued 06/12/2026. General Conditions &amp; Requirements excluded — priced separately in the estimate. Decisions and notes save automatically; with Supabase connected they sync live for all viewers.</footer>
+</main>
+
+<!-- add / edit modal -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3 id="mTitle">Add scope item</h3>
+    <p class="h">Free-type the Level and Division — new groups are created automatically and items sort into place.</p>
+    <div class="two">
+      <div class="fld"><label>Item no.</label><input id="mNo" placeholder="e.g. 09-12"></div>
+      <div class="fld"><label>Level</label><input id="mLevel" list="levelList" placeholder="e.g. Level 02"><datalist id="levelList"></datalist></div>
+    </div>
+    <div class="fld"><label>MasterFormat division</label><input id="mDiv" list="divList" placeholder="e.g. 09 — Finishes"><datalist id="divList"></datalist></div>
+    <div class="fld"><label>Scope description</label><textarea id="mDesc" placeholder="Describe the work and its extent…"></textarea></div>
+    <div class="fld"><label>Location</label><input id="mLoc" placeholder="e.g. Stage right / A1.03"></div>
+    <div class="fld"><label>Source / reference <span style="font-weight:400;text-transform:none">(optional)</span></label><textarea id="mSrc" placeholder="Drawing sheet, Juniper note, RFI #…"></textarea></div>
+    <div class="fld"><label><input type="checkbox" id="mDone" style="width:auto;margin-right:6px">Already completed</label></div>
+    <div class="modal-foot">
+      <button class="btn ghost" style="color:var(--sb-muted);border-color:var(--line)" onclick="closeModal()">Cancel</button>
+      <button class="btn" onclick="saveModal()">Save item</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ====== CONFIG: paste your Supabase values into config.js (see README) ====== */
+const SUPABASE_URL=window.SUPABASE_URL||"https://YOUR-PROJECT.supabase.co";
+const SUPABASE_ANON_KEY=window.SUPABASE_ANON_KEY||"YOUR-ANON-KEY";
+
+const LIVE = SUPABASE_URL && !SUPABASE_URL.includes("YOUR-") && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes("YOUR-") && window.supabase;
+const sb = LIVE ? window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY) : null;
+const SEED=[{"no": "02-01", "lv": "LL01 (Basement)", "ord": 1, "div": "02 — Existing Conditions / Demolition", "desc": "Demo and remove HP themed carpet, baseboard, and associated adhesive thoughout this floor", "loc": "Stage right", "src": "Juniper St. notes (Kim/Rainer)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-02", "lv": "LL01 (Basement)", "ord": 1, "div": "02 — Existing Conditions / Demolition", "desc": "Original Artworks are missing from Hallway wall - please clarify", "loc": "LL01 thru Level 04", "src": "A1.01–A1.05 Demo Note 1", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-03", "lv": "LL01 (Basement)", "ord": 1, "div": "02 — Existing Conditions / Demolition", "desc": "Remove decorative wallboard mural protection.", "loc": "Box seating, FOH foyers, Level 04", "src": "A6.02/A6.03 D-03; A6.13", "done": true, "snote": "", "cnote": "", "anote": ""}, {"no": "02-04", "lv": "LL01 (Basement)", "ord": 1, "div": "02 — Existing Conditions / Demolition", "desc": "Remove HP wallpaper and trim where located (D-01 / D-02 locations).", "loc": "Auditorium side/rear walls, boxes", "src": "A6.02 / A6.03 D-01, D-02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-05", "lv": "LL01 (Basement)", "ord": 1, "div": "02 — Existing Conditions / Demolition", "desc": "Auditorium: temporarily remove seats, demo floors and finishes", "loc": "LL01", "src": "A1.01", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-06", "lv": "LL01 (Basement)", "ord": 1, "div": "02 — Existing Conditions / Demolition", "desc": "Demolish and remove production lake-tank/trap pit; backfill and replace with slab-on-grade flush with existing slab.", "loc": "Trap room / basement", "src": "A1.01 plan note", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-07", "lv": "LL01 (Basement)", "ord": 1, "div": "02 — Existing Conditions / Demolition", "desc": "Fill all excavated holes in trap room floor.", "loc": "Trap room", "src": "Juniper St. notes (Show Related)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-08", "lv": "LL01 (Basement)", "ord": 1, "div": "02 — Existing Conditions / Demolition", "desc": "Remove USL quick-change booth in trap room; remove all shelving and clothes-hanger rods.", "loc": "Trap room", "src": "Juniper St. notes (Props)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "03-01", "lv": "LL01 (Basement)", "ord": 1, "div": "03 — Concrete", "desc": "New slab-on-grade infill at removed lake-tankpit, placed flush with existing adjacent slab.", "loc": "Trap room / basement", "src": "A1.01 plan note", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "03-02", "lv": "LL01 (Basement)", "ord": 1, "div": "03 — Concrete", "desc": "Concrete patching at floor penetrations, equipment anchors and excavated areas; match existing elevations and finish.", "loc": "Trap room, stage basement", "src": "A1.01; Juniper St. notes", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "06-01", "lv": "LL01 (Basement)", "ord": 1, "div": "06 — Wood, Plastics & Composites", "desc": "Restore pre-HPCC dressing-room counters and millwork.", "loc": "Level 01 / LL01 dressing rooms", "src": "A2.02; A4.07", "done": false, "snote": "Check for correctness / extent of scope not clear", "cnote": "", "anote": ""}, {"no": "08-01", "lv": "LL01 (Basement)", "ord": 1, "div": "08 — Openings", "desc": "Demo asnd remove the new door at Work Room and infill opening with CMU Wall - per job walk", "loc": "Per demo plans, all levels", "src": "A1.01–A1.05 Keynote 1", "done": false, "snote": "Check for scope", "cnote": "", "anote": ""}, {"no": "08-02", "lv": "LL01 (Basement)", "ord": 1, "div": "08 — Openings", "desc": "Remove and preserve existing doors for re-use; reinstall in original locations.", "loc": "Per demo plans, all levels", "src": "A1.01–A1.05 Keynote 1", "done": false, "snote": "Existing doors are already in place - no scope assumed", "cnote": "", "anote": ""}, {"no": "09-01", "lv": "LL01 (Basement)", "ord": 1, "div": "09 — Finishes", "desc": "Repaint ceilings and walls affected by the show: Hallway, stairs, and dressing rooms.", "loc": "FOH + auditorium, all levels", "src": "A2.21–A2.25; A10.10", "done": false, "snote": "Paint Wok Room excluded", "cnote": "", "anote": ""}, {"no": "09-02", "lv": "LL01 (Basement)", "ord": 1, "div": "09 — Finishes", "desc": "Decorative/historic repainting per EverGreene approved color system", "loc": "Auditorium + FOH + BOH", "src": "Restoration Set pp.33–107 (EverGreene 07/19/16 schedule + SW formulas)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-03", "lv": "LL01 (Basement)", "ord": 1, "div": "09 — Finishes", "desc": "Carpet and wall base at Hallway, staris, stair landing;, match existing; transitions to match pre-HPCC details.", "loc": "FOH lobbies & stairs", "src": "A2.01–A2.05 finish legend; A10.10", "done": false, "snote": "Carpet specs per documents", "cnote": "", "anote": ""}, {"no": "09-04", "lv": "LL01 (Basement)", "ord": 1, "div": "09 — Finishes", "desc": "Restore artwork finishes at stairs per documented photographs; PT-16 at staircases; and Murals", "loc": "Basement", "src": "A6.11", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "10-01", "lv": "LL01 (Basement)", "ord": 1, "div": "10 — Specialties", "desc": "Relocate existing toilet accessories to pre-HPCC location", "loc": "LL01 / L01 dressing rooms & restrooms", "src": "A4.07 Toilet Accessory Schedule", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "10-02", "lv": "LL01 (Basement)", "ord": 1, "div": "10 — Specialties", "desc": "Restore original building signage from storage.", "loc": "FOH stairs / feature wall", "src": "A6.11", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "12-01", "lv": "LL01 (Basement)", "ord": 1, "div": "12 — Furnishings", "desc": "Reinstall 'Casey Waits' paintings (stored pre-HPCC) and all stair artwork to documented locations.", "loc": "FOH stairs & foyers", "src": "A6.11 / A6.12", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "21-01", "lv": "LL01 (Basement)", "ord": 1, "div": "21 — Fire Suppression", "desc": "Restore re-routed sprinklers in trap room to original configuration.", "loc": "Trap room", "src": "Juniper St. notes (Show Related)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "22-01", "lv": "LL01 (Basement)", "ord": 1, "div": "22 — Plumbing", "desc": "Restore dressing rooms and restrooms to previous conditions.", "loc": "LL01 / L01", "src": "A1.01 Keynote 5", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "22-02", "lv": "LL01 (Basement)", "ord": 1, "div": "22 — Plumbing", "desc": "Relocate existing sinks, lavatories, faucets and toilets to original pre-HPCC locations.", "loc": "LL01 / L01 dressing rooms", "src": "A4.07 plans 1 & 2", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "23-01", "lv": "LL01 (Basement)", "ord": 1, "div": "23 — HVAC", "desc": "Restore all mechanical associated with demolished areas(showers, production rooms) as needed", "loc": "LL01 / production areas", "src": "A1.01 Keynote 5", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-01", "lv": "LL01 (Basement)", "ord": 1, "div": "26 — Electrical", "desc": "Restore original sconces from Building Owner's storage at all noted locations", "loc": "Auditorium + FOH, all levels", "src": "A2.21–A2.25; A6.02/A6.03; A10.10 L-01", "done": true, "snote": "", "cnote": "", "anote": ""}, {"no": "26-02", "lv": "LL01 (Basement)", "ord": 1, "div": "26 — Electrical", "desc": "Verify and restore existing light switches and power at restored dressing rooms.", "loc": "LL01 / L01 dressing rooms", "src": "A4.07 note", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-03", "lv": "LL01 (Basement)", "ord": 1, "div": "26 — Electrical", "desc": "Restore ceiling 70A isolated-ground panel and associated branch circuits (audio distributed power)", "loc": "Attic/ceiling + basement", "src": "Juniper St. notes (Sound/Electrics)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-04", "lv": "LL01 (Basement)", "ord": 1, "div": "26 — Electrical", "desc": "Restore basement isolated-ground branch circuits interrupted for lake-tank supply.", "loc": "Attic/ceiling + basement", "src": "Juniper St. notes (Sound/Electrics)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-05", "lv": "LL01 (Basement)", "ord": 1, "div": "26 — Electrical", "desc": "Restore overhead fluorescent light fixtures in trap room.", "loc": "Trap room", "src": "Juniper St. notes (Show Related)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-01", "lv": "LL01 (Basement)", "ord": 1, "div": "27 — Communications / Sound & Video", "desc": "Restore basement rack with house networking patch bays incl. fiber/category cabling and termination", "loc": "Basement", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-02", "lv": "LL01 (Basement)", "ord": 1, "div": "27 — Communications / Sound & Video", "desc": "Restore video patchbay and associated cable distribution.", "loc": "Basement", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-03", "lv": "LL01 (Basement)", "ord": 1, "div": "27 — Communications / Sound & Video", "desc": "Install rail cameras and mics incl. cabling", "loc": "Stage / BOH", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-04", "lv": "LL01 (Basement)", "ord": 1, "div": "27 — Communications / Sound & Video", "desc": "Restore stage door / basement backstage-announce system incl. cable supply", "loc": "Stage / BOH", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-05", "lv": "LL01 (Basement)", "ord": 1, "div": "27 — Communications / Sound & Video", "desc": "Restore production intercom (cabling and networking).", "loc": "Stage / BOH", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "KP-01", "lv": "LL01 (Basement)", "ord": 1, "div": "KP — Production Improvements (Recommended to Remain)", "desc": "KEEP: Dressing-room upgrades - full-size mirrors, additional lighting, additional conduit and outlets (except WHAM room and Star Room reconfiguration). Noted 'YES' in source.", "loc": "Dressing rooms", "src": "Juniper St. notes — 'keep' list", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "KP-02", "lv": "LL01 (Basement)", "ord": 1, "div": "KP — Production Improvements (Recommended to Remain)", "desc": "KEEP: HP custom mix-position desk furniture and surround railing (potential reuse at rear-of-orchestra booth); portion of trap-room desk.", "loc": "Auditorium / trap room", "src": "Juniper St. notes — 'keep' list", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-01", "lv": "Level 01", "ord": 2, "div": "02 — Existing Conditions / Demolition", "desc": "Demo and remove HP themed carpet, baseboard, and associated adhesive thoughout this floor", "loc": "Stage right", "src": "Juniper St. notes (Kim/Rainer)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-02", "lv": "Level 01", "ord": 2, "div": "02 — Existing Conditions / Demolition", "desc": "Original Artworks are missing from Hallway wall - please clarify", "loc": "LL01 thru Level 04", "src": "A1.01–A1.05 Demo Note 1", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-03", "lv": "Level 01", "ord": 2, "div": "02 — Existing Conditions / Demolition", "desc": "Remove decorative wallboard mural protection.", "loc": "Box seating, FOH foyers, Level 04", "src": "A6.02/A6.03 D-03; A6.13", "done": true, "snote": "", "cnote": "", "anote": ""}, {"no": "02-04", "lv": "Level 01", "ord": 2, "div": "02 — Existing Conditions / Demolition", "desc": "Remove HP wallpaper and trim where located (D-01 / D-02 locations).", "loc": "Auditorium side/rear walls, boxes", "src": "A6.02 / A6.03 D-01, D-02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-05", "lv": "Level 01", "ord": 2, "div": "02 — Existing Conditions / Demolition", "desc": "Restore shower room, and plumbing fixtures at dressing rooms", "loc": "L01", "src": "A1.01", "done": true, "snote": "Completed?", "cnote": "", "anote": ""}, {"no": "02-06", "lv": "Level 01", "ord": 2, "div": "02 — Existing Conditions / Demolition", "desc": "Auditorium: temporarily remove seats, demo floors and finishes", "loc": "L01", "src": "A1.01", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "05-01", "lv": "Level 01", "ord": 2, "div": "05 — Metals", "desc": "Reinstall existing orchestra-pit handrail after removal of filler platforms.", "loc": "Orchestra pit", "src": "Juniper St. notes", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "05-02", "lv": "Level 01", "ord": 2, "div": "05 — Metals", "desc": "MTL-01 brake-shape metal base at main bar; match existing, V.I.F. locations.", "loc": "Level 01 FOH main bar", "src": "A10.10 Finish Schedule", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "06-01", "lv": "Level 01", "ord": 2, "div": "06 — Wood, Plastics & Composites", "desc": "Infill stage-deck openings with tongue-and-groove planking to match existing house deck; restore removed planks.", "loc": "Stage", "src": "Juniper St. notes (Carpentry); G0.01 scope", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "06-02", "lv": "Level 01", "ord": 2, "div": "06 — Wood, Plastics & Composites", "desc": "Restore bar millwork, back-bar counters and die walls to pre-HPCC layout; restore marble at back bar to original condition.", "loc": "FOH bars LV01–LV03", "src": "A4.02–A4.04; A1.02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "06-03", "lv": "Level 01", "ord": 2, "div": "06 — Wood, Plastics & Composites", "desc": "Restore pre-HPCC dressing-room counters and millwork.", "loc": "Level 01 / LL01 dressing rooms", "src": "A2.02; A4.07", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "06-04", "lv": "Level 01", "ord": 2, "div": "06 — Wood, Plastics & Composites", "desc": "Verify existing ST-01 stone countertops; replace any damaged by equipment.", "loc": "Level 01 FOH main bar", "src": "A2.02; A10.10 SC-01", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "08-01", "lv": "Level 01", "ord": 2, "div": "08 — Openings", "desc": "Remove and preserve existing doors for re-use; reinstall in original locations.", "loc": "Per demo plans, all levels", "src": "A1.01–A1.05 Keynote 1", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "08-02", "lv": "Level 01", "ord": 2, "div": "08 — Openings", "desc": "GL-01 seeded bronze mirror (5/16\", Archetype Frameless Glass CM5T-1005) — restore bronze mirrors at back-bar walls", "loc": "Level 01 back bar", "src": "A10.10 GL-01; A2.02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-01", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Repaint existing walls, ceilings, doors and frames back to pre-HP throughout per RCP", "loc": "Level 01", "src": "", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-02", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Repaint: Restore showerrooms / showers, and Dressing rooms in this level", "loc": "Level 01", "src": "", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-03", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Repair plaster as needed - we'll carry an allowance if confirmed", "loc": "Proscenium / auditorium", "src": "Juniper St. notes (Carpentry)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-04", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Repaint general damage from UV lights, speakers, rigging, etc.; repair and repaint all ceiling holes from FOH flying", "loc": "Auditorium walls & ceiling", "src": "Juniper St. notes (Show Related)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-05", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "After wallpaper removal, repaint walls to match previous conditions (match adjacent color) using preserved physical samples.", "loc": "Auditorium side/rear walls", "src": "A6.02/A6.03 D-01", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-06", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "At former painted-mural locations,  reproduce the murals; repaint walls to match pre-production conditions.", "loc": "Auditorium walls", "src": "A6.02/A6.03 D-02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-07", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Patch and repaint walls around mural frames after protection removal, to match adjacent colors per preserved samples.", "loc": "Box seating, foyers", "src": "A6.02/A6.03 D-03", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-08", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Re-paint ceiling/soffit areas at entry vestibule adjacent to existing marquee", "loc": "Level 01–02 entry", "src": "A2.22 / A2.23 RCP notes", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-09", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Decorative/historic repainting per EverGreene approved color system", "loc": "Auditorium + FOH + BOH", "src": "Restoration Set pp.33–107 (EverGreene 07/19/16 schedule + SW formulas)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-10", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Re-finish Auditorium floor and tread coating", "loc": "Auditorium floors, railings", "src": "EverGreene list p.35; SW labels", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-11", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Install new Carpet to match the Pre-HPCC look at all locations in Lower Level / Basement", "loc": "FOH lobbies & stairs", "src": "A2.01–A2.05 finish legend; A10.10", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-12", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Remove and reinstall existing auditorium seating as required for carpet installation.", "loc": "Auditorium, all levels", "src": "A2.02–A2.05 plan note", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-13", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "New wall base at all affected areas", "loc": "Restrooms, BOH", "src": "A2 finish legend; A10.10", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-14", "lv": "Level 01", "ord": 2, "div": "09 — Finishes", "desc": "Integrated contrast strip at all stairs per detail; cut-outs on stairs for contrast strip — coordinate with Owner / theatre designer.", "loc": "All public stairs", "src": "A2.02 sheet note 2", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "10-01", "lv": "Level 01", "ord": 2, "div": "10 — Specialties", "desc": "Relocate existing toilet accessories to pre-HPCC locations", "loc": "LL01 / L01 dressing rooms & restrooms", "src": "A4.07 Toilet Accessory Schedule", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "11-01", "lv": "Level 01", "ord": 2, "div": "11 — Equipment (Food Service & Theatrical)", "desc": "Remove HPCC bar equipment and return to Client; restore stored pre-HPCC food-service equipment to original layout", "loc": "FOH bars LV01–LV03", "src": "A4.02/A4.03 Equipment Schedule; A1.02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "11-02", "lv": "Level 01", "ord": 2, "div": "11 — Equipment (Food Service & Theatrical)", "desc": "Rebuild fly system: restore every house lineset altered for the production — new wire rope and hardware throughout; restore all house sets and rigging onstage.", "loc": "Stage / fly tower", "src": "Juniper St. notes (Carpentry)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "12-01", "lv": "Level 01", "ord": 2, "div": "12 — Furnishings", "desc": "Restore original curtains (stored pre-HPCC) at all entrances into auditorium from FOH; remove production curtains/rod assemblies and return to Client.", "loc": "Auditorium entrances, all levels", "src": "A10.10 CF-01; A2.22–A2.25; A2.02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "12-02", "lv": "Level 01", "ord": 2, "div": "12 — Furnishings", "desc": "All Auditorium seating to remain: protect; verify condition against PCR photo baseline (photos 90–93)", "loc": "Auditorium", "src": "A2 plans; PCR 2 letter", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "21-01", "lv": "Level 01", "ord": 2, "div": "21 — Fire Suppression", "desc": "Restore re-routed sprinklers on upstage side of proscenium.", "loc": "Stage / proscenium", "src": "Juniper St. notes (Show Related)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "22-01", "lv": "Level 01", "ord": 2, "div": "22 — Plumbing", "desc": "Remove all plumbing associated with demolished showers/fixtures; terminate to point of origin/branch, seal and cap as required.", "loc": "LL01 / L01", "src": "A1.01 Keynote 5", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "22-02", "lv": "Level 01", "ord": 2, "div": "22 — Plumbing", "desc": "Relocate existing sinks, lavatories, faucets and toilets to original pre-HPCC locations; restore dressing rooms and restrooms to previous conditions.", "loc": "LL01 / L01 dressing rooms", "src": "A4.07 plans 1 & 2", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "23-01", "lv": "Level 01", "ord": 2, "div": "23 — HVAC", "desc": "Remove all mechanical associated with demolished areas (showers, production rooms); terminate to point of origin/branch, seal and cap as required.", "loc": "LL01 / production areas", "src": "A1.01 Keynote 5", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-01", "lv": "Level 01", "ord": 2, "div": "26 — Electrical", "desc": "Restore scones as needed", "loc": "Auditorium + FOH, all levels", "src": "A2.21–A2.25; A6.02/A6.03; A10.10 L-01", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-02", "lv": "Level 01", "ord": 2, "div": "26 — Electrical", "desc": "Verify and restore existing light switches and power at restored dressing rooms.", "loc": "LL01 / L01 dressing rooms", "src": "A4.07 note", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-03", "lv": "Level 01", "ord": 2, "div": "26 — Electrical", "desc": "Remove pool power panel from orchestra pit; re-route to plenum for future production power.", "loc": "Orchestra pit / plenum", "src": "Juniper St. notes (Electrics)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-04", "lv": "Level 01", "ord": 2, "div": "26 — Electrical", "desc": "Low-voltage/electrical requirements at bars per Food Service plans; coordinate with Client and Owner.", "loc": "FOH bars", "src": "A4.02 note", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-01", "lv": "Level 01", "ord": 2, "div": "27 — Communications / Sound & Video", "desc": "Restore basement rack with house networking patch bays incl. fiber/category cabling and termination", "loc": "Basement", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-02", "lv": "Level 01", "ord": 2, "div": "27 — Communications / Sound & Video", "desc": "Restore video patchbay and associated cable distribution.", "loc": "Basement", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-03", "lv": "Level 01", "ord": 2, "div": "27 — Communications / Sound & Video", "desc": "Install rail cameras and mics incl. cabling", "loc": "Stage / BOH", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-04", "lv": "Level 01", "ord": 2, "div": "27 — Communications / Sound & Video", "desc": "Restore stage door / basement backstage-announce system incl. cable supply", "loc": "Stage / BOH", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-05", "lv": "Level 01", "ord": 2, "div": "27 — Communications / Sound & Video", "desc": "Restore production intercom (cabling and networking).", "loc": "Stage / BOH", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "KP-01", "lv": "Level 01", "ord": 2, "div": "KP — Production Improvements (Recommended to Remain)", "desc": "KEEP: Added fire door at orchestra pit (leave in place as building improvement). Noted 'YES' in source.", "loc": "Orchestra pit", "src": "Juniper St. notes — 'keep' list", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "KP-02", "lv": "Level 01", "ord": 2, "div": "KP — Production Improvements (Recommended to Remain)", "desc": "KEEP: Dressing-room upgrades — full-size mirrors, additional lighting, additional conduit and outlets (except WHAM room and Star Room reconfiguration). Noted 'YES' in source.", "loc": "Dressing rooms", "src": "Juniper St. notes — 'keep' list", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "KP-03", "lv": "Level 01", "ord": 2, "div": "KP — Production Improvements (Recommended to Remain)", "desc": "KEEP: HP custom mix-position desk furniture and surround railing (potential reuse at rear-of-orchestra booth); portion of trap-room desk.", "loc": "Auditorium / trap room", "src": "Juniper St. notes — 'keep' list", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-01", "lv": "Level 02", "ord": 3, "div": "02 — Existing Conditions / Demolition", "desc": "Demo and remove HP themed carpet, baseboard, and associated adhesive thoughout this floor", "loc": "A1.03", "src": "A1.01–A1.05 Demo Note 1", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-02", "lv": "Level 02", "ord": 3, "div": "02 — Existing Conditions / Demolition", "desc": "Remove and salvage Bar equipment installled for the HPCC production", "loc": "A1.03", "src": "", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-03", "lv": "Level 02", "ord": 3, "div": "02 — Existing Conditions / Demolition", "desc": "Remove new walls and hard protective panels installed over existing murals", "loc": "A1.03", "src": "A6.02/A6.03 D-03; A6.13", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-04", "lv": "Level 02", "ord": 3, "div": "02 — Existing Conditions / Demolition", "desc": "Remove HP wallpaper and trim where located", "loc": "", "src": "", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-05", "lv": "Level 02", "ord": 3, "div": "02 — Existing Conditions / Demolition", "desc": "Remove decorative wallboard mural protection and curtains.", "loc": "A1.03", "src": "A6.02/A6.03 D-03; A6.13", "done": true, "snote": "", "cnote": "", "anote": ""}, {"no": "06-01", "lv": "Level 02", "ord": 3, "div": "06 — Wood, Plastics & Composites", "desc": "Restore bar millwork, back-bar counters and die walls to pre-HPCC layout; restore marble at back bar to original condition.", "loc": "FOH bars LV01–LV03", "src": "A4.02–A4.04; A1.02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "08-01", "lv": "Level 02", "ord": 3, "div": "08 — Openings", "desc": "Check existing door hardwares for re-use", "loc": "Per demo plans, all levels", "src": "A1.01–A1.05 Keynote 1", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-01", "lv": "Level 02", "ord": 3, "div": "09 — Finishes", "desc": "Patch and repaint walls around mural frames after protection removal, to match adjacent colors per preserved samples.", "loc": "Box seating, foyers", "src": "A6.02/A6.03 D-03", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-02", "lv": "Level 02", "ord": 3, "div": "09 — Finishes", "desc": "Repaint ceilings, walls, and doors to Pre-HPCC conditions", "loc": "FOH + auditorium, all levels", "src": "A2.21–A2.25; A10.10", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-03", "lv": "Level 02", "ord": 3, "div": "09 — Finishes", "desc": "Re-paint ceiling/soffit areas at entry vestibule adjacent to existing marquee; (existing marquee to remain).", "loc": "Level 01–02 entry", "src": "A2.22 / A2.23 RCP notes", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-04", "lv": "Level 02", "ord": 3, "div": "09 — Finishes", "desc": "Decorative/historic repainting per EverGreene approved color system (P1–P27 )", "loc": "Auditorium + FOH + BOH", "src": "Restoration Set pp.33–107 (EverGreene 07/19/16 schedule + SW formulas)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-05", "lv": "Level 02", "ord": 3, "div": "09 — Finishes", "desc": "Install new Carpet throughout", "loc": "FOH lobbies & stairs", "src": "A2.01–A2.05 finish legend; A10.10", "done": false, "snote": "All existing seats to remain as is.", "cnote": "", "anote": ""}, {"no": "09-06", "lv": "Level 02", "ord": 3, "div": "09 — Finishes", "desc": "Integrated contrast strip at all stairs per detail; cut-outs on stairs for contrast strip — coordinate with Owner / theatre designer.", "loc": "All public stairs", "src": "A2.02 sheet note 2", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "11-01", "lv": "Level 02", "ord": 3, "div": "11 — Equipment (Food Service & Theatrical)", "desc": "Remove HPCC bar equipment and return to Client; restore stored pre-HPCC food-service equipment to original layout per Food Service plans", "loc": "FOH bars LV01–LV03", "src": "A4.02/A4.03 Equipment Schedule; A1.02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "12-01", "lv": "Level 02", "ord": 3, "div": "12 — Furnishings", "desc": "CF-01: restore original curtains (stored pre-HPCC) at all entrances into auditorium from FOH; remove production curtains/rod assemblies and return to Client.", "loc": "Auditorium entrances, all levels", "src": "A10.10 CF-01; A2.22–A2.25; A2.02", "done": true, "snote": "Completed per RCP", "cnote": "", "anote": ""}, {"no": "12-02", "lv": "Level 02", "ord": 3, "div": "12 — Furnishings", "desc": "Reinstall 'Casey Waits' paintings (stored pre-HPCC) and all stair artwork to documented locations.", "loc": "FOH stairs & foyers", "src": "A6.11 / A6.12", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-01", "lv": "Level 02", "ord": 3, "div": "26 — Electrical", "desc": "Restore wall scones", "loc": "Auditorium + FOH, all levels", "src": "A2.21–A2.25; A6.02/A6.03; A10.10 L-01", "done": true, "snote": "", "cnote": "", "anote": ""}, {"no": "26-02", "lv": "Level 02", "ord": 3, "div": "26 — Electrical", "desc": "Low-voltage/electrical requirements at bars per Food Service plans; coordinate with Client and Owner.", "loc": "FOH bars", "src": "A4.02 note", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-01", "lv": "Level 03", "ord": 4, "div": "02 — Existing Conditions / Demolition", "desc": "Demo and remove HP themed carpet, baseboard, and associated adhesive thoughout this floor", "loc": "A1.04", "src": "A1.01–A1.05 Demo Note 1", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-02", "lv": "Level 03", "ord": 4, "div": "02 — Existing Conditions / Demolition", "desc": "Remove and salvage Bar equipment installled for the HPCC production", "loc": "A1.04", "src": "", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-03", "lv": "Level 03", "ord": 4, "div": "02 — Existing Conditions / Demolition", "desc": "Remove new walls and hard protective panels installed over existing murals", "loc": "A1.04", "src": "A6.02/A6.03 D-03; A6.13", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-04", "lv": "Level 03", "ord": 4, "div": "02 — Existing Conditions / Demolition", "desc": "Remove HP wallpaper and trim where located", "loc": "A1.04", "src": "", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-05", "lv": "Level 03", "ord": 4, "div": "02 — Existing Conditions / Demolition", "desc": "Remove decorative wallboard mural protection and curtains.", "loc": "A1.04", "src": "A6.02/A6.03 D-03; A6.13", "done": true, "snote": "", "cnote": "", "anote": ""}, {"no": "06-01", "lv": "Level 03", "ord": 4, "div": "06 — Wood, Plastics & Composites", "desc": "Restore bar millwork, back-bar counters and die walls to pre-HPCC layout; restore marble at back bar to original condition.", "loc": "FOH bars LV01–LV03", "src": "A4.02–A4.04; A1.02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "08-01", "lv": "Level 03", "ord": 4, "div": "08 — Openings", "desc": "Check existing door hardwares for re-use", "loc": "Per demo plans, all levels", "src": "A1.01–A1.05 Keynote 1", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-01", "lv": "Level 03", "ord": 4, "div": "09 — Finishes", "desc": "Patch and repaint walls around mural frames after protection removal, to match adjacent colors per preserved samples.", "loc": "Box seating, foyers", "src": "A6.02/A6.03 D-03", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-02", "lv": "Level 03", "ord": 4, "div": "09 — Finishes", "desc": "Repaint ceilings, walls, and doors to Pre-HPCC conditions", "loc": "FOH + auditorium, all levels", "src": "A2.21–A2.25; A10.10", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-03", "lv": "Level 03", "ord": 4, "div": "09 — Finishes", "desc": "Re-paint ceiling/soffit areas at entry vestibule adjacent to existing marquee; (existing marquee to remain).", "loc": "Level 01–02 entry", "src": "A2.22 / A2.23 RCP notes", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-04", "lv": "Level 03", "ord": 4, "div": "09 — Finishes", "desc": "Decorative/historic repainting per EverGreene approved color system (P1–P27 )", "loc": "Auditorium + FOH + BOH", "src": "Restoration Set pp.33–107 (EverGreene 07/19/16 schedule + SW formulas)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-05", "lv": "Level 03", "ord": 4, "div": "09 — Finishes", "desc": "Install new Carpet throughout", "loc": "FOH lobbies & stairs", "src": "A2.01–A2.05 finish legend; A10.10", "done": false, "snote": "All existing seats to remain as is.", "cnote": "", "anote": ""}, {"no": "09-06", "lv": "Level 03", "ord": 4, "div": "09 — Finishes", "desc": "Integrated contrast strip at all stairs per detail; cut-outs on stairs for contrast strip — coordinate with Owner / theatre designer.", "loc": "All public stairs", "src": "A2.02 sheet note 2", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "11-01", "lv": "Level 03", "ord": 4, "div": "11 — Equipment (Food Service & Theatrical)", "desc": "Remove HPCC bar equipment and return to Client; restore stored pre-HPCC food-service equipment to original layout per Food Service plans", "loc": "FOH bars LV01–LV03", "src": "A4.02/A4.03 Equipment Schedule; A1.02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "12-01", "lv": "Level 03", "ord": 4, "div": "12 — Furnishings", "desc": "CF-01: restore original curtains (stored pre-HPCC) at all entrances into auditorium from FOH; remove production curtains/rod assemblies and return to Client.", "loc": "Auditorium entrances, all levels", "src": "A10.10 CF-01; A2.22–A2.25; A2.02", "done": true, "snote": "Completed per RCP", "cnote": "", "anote": ""}, {"no": "12-02", "lv": "Level 03", "ord": 4, "div": "12 — Furnishings", "desc": "Reinstall 'Casey Waits' paintings (stored pre-HPCC) and all stair artwork to documented locations.", "loc": "FOH stairs & foyers", "src": "A6.11 / A6.12", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-01", "lv": "Level 03", "ord": 4, "div": "26 — Electrical", "desc": "Restore wall scones", "loc": "Auditorium + FOH, all levels", "src": "A2.21–A2.25; A6.02/A6.03; A10.10 L-01", "done": true, "snote": "", "cnote": "", "anote": ""}, {"no": "26-02", "lv": "Level 03", "ord": 4, "div": "26 — Electrical", "desc": "Low-voltage/electrical requirements at bars per Food Service plans; coordinate with Client and Owner.", "loc": "FOH bars", "src": "A4.02 note", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-01", "lv": "Level 03", "ord": 4, "div": "27 — Communications / Sound & Video", "desc": "Restore house sound/video infrastructure removed for the production, incl. re-termination of original under-balcony/under-mezzanine speaker wiring to pre-HP configuration.", "loc": "Auditorium", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-02", "lv": "Level 03", "ord": 4, "div": "27 — Communications / Sound & Video", "desc": "Install under-balcony, under-mezzanine and balcony delay speakers incl. fiber/category/power cabling, truss and rigging; attic/ceiling rack power supplies for fills.", "loc": "Auditorium / attic", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-01", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "02 — Existing Conditions / Demolition", "desc": "Demo and remove HP themed carpet, baseboard, and associated adhesive thoughout this floor", "loc": "A1.04", "src": "A1.01–A1.05 Demo Note 1", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-02", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "02 — Existing Conditions / Demolition", "desc": "Remove and salvage Bar equipment installled for the HPCC production", "loc": "A1.04", "src": "", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-03", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "02 — Existing Conditions / Demolition", "desc": "Remove new walls and hard protective panels installed over existing murals", "loc": "A1.04", "src": "A6.02/A6.03 D-03; A6.13", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-04", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "02 — Existing Conditions / Demolition", "desc": "Remove HP wallpaper and trim where located", "loc": "A1.04", "src": "", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "02-05", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "02 — Existing Conditions / Demolition", "desc": "Remove decorative wallboard mural protection and curtains.", "loc": "A1.04", "src": "A6.02/A6.03 D-03; A6.13", "done": true, "snote": "", "cnote": "", "anote": ""}, {"no": "08-01", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "08 — Openings", "desc": "Remove and preserve existing doors for re-use; reinstall in original locations.", "loc": "Per demo plans, all levels", "src": "A1.01–A1.05 Keynote 1", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-01", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "Plaster repair at proscenium and house walls damaged by set removal; access as required.", "loc": "Proscenium / auditorium", "src": "Juniper St. notes (Carpentry)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-02", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "Repair and repaint general damage from UV lights, speakers, rigging, etc.; repair and repaint all ceiling holes from FOH flying and followspot platforms.", "loc": "Auditorium walls & ceiling", "src": "Juniper St. notes (Show Related)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-03", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "After wallpaper removal, repaint walls to match previous conditions (match adjacent color) using preserved physical samples.", "loc": "Auditorium side/rear walls", "src": "A6.02/A6.03 D-01", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-04", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "At former painted-mural locations, produce fabricated stencils from documented photographs and reproduce the murals", "loc": "Auditorium walls", "src": "A6.02/A6.03 D-02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-05", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "Patch and repaint walls around mural frames after protection removal, to match adjacent colors per preserved samples.", "loc": "Box seating, foyers", "src": "A6.02/A6.03 D-03", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-06", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "Repaint ceilings and walls", "loc": "FOH + auditorium, all levels", "src": "A2.21–A2.25; A10.10", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-07", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "Dome conservation: clean and conserve original dome ornament and ceiling coffers; in-paint original dome field; conserve dome soffit/cornice; reinstate metallic finishes (Modern Masters ME659 Olympic Gold / ME204 Antique Bronze) and new accent colors at dome, entablature and soffit borders.", "loc": "Auditorium dome & entablature", "src": "EverGreene schedule p.39–40", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-08", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "Paint patterns to match pre-HPCC conditions, verified against documented photographs; confirm with Owner. Paint doors and frames", "loc": "FOH foyers LV02–04, stairs", "src": "A2.23–A2.25; A6.12/A6.13", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-09", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "Auditorium floor and tread coating: ArmorSeal Tread-Plex P14A (Tricorn Black); railings/caps P13 semi-gloss.", "loc": "Auditorium floors, railings", "src": "EverGreene list p.35; SW labels", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-10", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "New Pre-HP Carpet and base board throughout", "loc": "FOH lobbies & stairs", "src": "A2.01–A2.05 finish legend; A10.10", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-11", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "Remove and reinstall existing auditorium seating as required for carpet installation.", "loc": "Auditorium, all levels", "src": "A2.02–A2.05 plan note", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "09-12", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "09 — Finishes", "desc": "Integrated contrast strip at all stairs per detail; cut-outs on stairs for contrast strip - coordinate with Owner / theatre designer.", "loc": "All public stairs", "src": "A2.02 sheet note 2", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "12-01", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "12 — Furnishings", "desc": "CF-01: restore original curtains (stored pre-HPCC) at all entrances into auditorium from FOH; remove production curtains/rod assemblies and return to Client.", "loc": "Auditorium entrances, all levels", "src": "A10.10 CF-01; A2.22–A2.25; A2.02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "12-02", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "12 — Furnishings", "desc": "Restore original curtains at Levels 03 and 04 as noted on plans.", "loc": "Levels 03–04", "src": "A2.04 / A2.05", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "12-03", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "12 — Furnishings", "desc": "Auditorium seating to remain: protect; verify condition against PCR photo baseline (photos 90–93); clean/repair excessive wear or stains.", "loc": "Auditorium", "src": "A2 plans; PCR 2 letter", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-01", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "26 — Electrical", "desc": "Re-install scones", "loc": "Auditorium + FOH, all levels", "src": "A2.21–A2.25; A6.02/A6.03; A10.10 L-01", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-02", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "26 — Electrical", "desc": "L-02: Remove HP ceiling-mounted fixtures and return to Client; restore previous ceiling-mounted fixtures from storage.", "loc": "Auditorium Level 04 / FOH", "src": "A2.25; A10.10 L-02", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "26-03", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "26 — Electrical", "desc": "Restore sound power panel in attic (removed over 'Dementor' opening) incl. conduit feeding isolated sound power outlets in attic.", "loc": "Attic", "src": "Juniper St. notes (Electrics)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-01", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "27 — Communications / Sound & Video", "desc": "Restore house sound/video infrastructure removed for the production, incl. re-termination of original under-balcony/under-mezzanine speaker wiring to pre-HP configuration.", "loc": "Auditorium", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "27-02", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "27 — Communications / Sound & Video", "desc": "Install under-balcony, under-mezzanine and balcony delay speakers incl. fiber/category/power cabling, truss and rigging; attic/ceiling rack power supplies for fills.", "loc": "Auditorium / attic", "src": "Juniper St. notes (Sound)", "done": false, "snote": "", "cnote": "", "anote": ""}, {"no": "KP-01", "lv": "Level 04 + Attic-Dome", "ord": 5, "div": "KP — Production Improvements (Recommended to Remain)", "desc": "KEEP: Ceiling catwalks and access stairs in auditorium attic; walkways installed in dome area. Noted 'YES' in source.", "loc": "Auditorium attic / dome", "src": "Juniper St. notes — 'keep' list", "done": false, "snote": "", "cnote": "", "anote": ""}];
+let DATA=[], deferred=false;
+const initEl=document.getElementById("initials");
+try{initEl.value=localStorage.getItem("curran_initials")||"";}catch(e){}
+initEl.addEventListener("input",()=>{try{localStorage.setItem("curran_initials",initEl.value.trim());}catch(e){}});
+function getInit(){return (initEl.value||"").trim();}
+
+function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function divKey(d){const c=(d||"").split("—")[0].replace(/\D/g,"");return c||"zzz";}
+let st;function flashSaved(id){const el=document.getElementById(id);if(!el)return;el.classList.add("show");clearTimeout(st);st=setTimeout(()=>el.classList.remove("show"),1100);}
+function setBanner(state,msg){const b=document.getElementById("connBanner"),m=document.getElementById("connMsg");
+  if(state==="live"){b.style.background="#e7f7ee";b.style.color="#15643a";b.style.borderColor="#bfe6cf";m.innerHTML='● <b>Live</b> — every edit syncs for everyone in real time. Share this URL with the client &amp; architect.';}
+  else if(state==="local"){b.style.background="#fffbe9";b.style.color="#6b5300";b.style.borderColor="#f0e2b6";m.innerHTML='Local preview mode — edits stay in this browser only. Add your Supabase keys to <b>config.js</b> (see README) and redeploy to turn on live sharing.';}
+  else{b.style.background="#fdecec";b.style.color="#9b1c1c";b.style.borderColor="#f5c2c2";m.innerHTML='Could not reach Supabase — running in local mode. '+esc(msg||"");}
+}
+const mapS=r=>({id:r.id,pos:r.pos,no:r.no||"",lv:r.lv,ord:r.ord,div:r.div,desc:r.descr,loc:r.loc||"",src:r.src,done:!!r.done,snote:r.snote||"",
+  cdec:r.cdecision||"",cby:r.cby||"",cdt:r.cdt||"",cnote:r.cnote||"",adec:r.adecision||"",aby:r.aby||"",adt:r.adt||"",anote:r.anote||""});
+const toS=d=>({pos:d.pos,no:d.no||"",lv:d.lv,ord:d.ord,div:d.div,descr:d.desc,loc:d.loc||"",src:d.src,done:!!d.done,snote:d.snote||"",
+  cdecision:d.cdec||"",cby:d.cby||"",cdt:d.cdt||"",cnote:d.cnote||"",adecision:d.adec||"",aby:d.aby||"",adt:d.adt||"",anote:d.anote||""});
+function cacheS(){try{localStorage.setItem("curran_scope_v5",JSON.stringify(DATA));}catch(e){}}
+function sortS(){DATA.sort((a,b)=>(a.ord-b.ord)||((a.pos??0)-(b.pos??0)));}
+const blankS=(d,i)=>({id:"s"+i,pos:i,cdec:"",cby:"",cdt:"",cnote:"",adec:"",aby:"",adt:"",anote:"",...d});
+
+async function boot(){
+  if(LIVE){
+    try{
+      let {data:s,error:e1}=await sb.from("scope_items").select("*"); if(e1)throw e1;
+      if(!s||!s.length){await sb.from("scope_items").insert(SEED.map((d,i)=>toS(blankS(d,i))));({data:s}=await sb.from("scope_items").select("*"));}
+      DATA=(s||[]).map(mapS); sortS();
+      subscribe(); setBanner("live");
+    }catch(err){console.error(err);setBanner("err",err.message||err);localBoot();}
+  } else { localBoot(); setBanner("local"); }
+  render();
+}
+function localBoot(){
+  try{DATA=JSON.parse(localStorage.getItem("curran_scope_v5"))||SEED.map(blankS);}catch(e){DATA=SEED.map(blankS);}
+  sortS();
+}
+async function reloadData(){ if(LIVE){await boot();} else {localBoot();render();} }
+
+function subscribe(){
+  sb.channel("sc").on("postgres_changes",{event:"*",schema:"public",table:"scope_items"},p=>{
+    if(p.eventType==="DELETE"){DATA=DATA.filter(x=>x.id!==p.old.id);}
+    else{const m=mapS(p.new);const i=DATA.findIndex(x=>x.id===m.id);if(i>=0)DATA[i]=m;else DATA.push(m);}
+    sortS();cacheS();safeRender("scope");
+  }).subscribe();
+}
+function safeRender(which){const a=document.activeElement;if(a&&/TEXTAREA|INPUT/.test(a.tagName)){deferred=true;return;}render();}
+document.addEventListener("focusout",()=>{if(deferred){deferred=false;render();}});
+async function pushS(d){flashSaved("saved");cacheS();if(!LIVE)return;try{await sb.from("scope_items").update(toS(d)).eq("id",d.id);}catch(e){console.error(e);}}
+
+
+/* ===================== SCOPE ===================== */
+function aggState(d){const c=d.cdec,a=d.adec;if(!c&&!a)return"";if(c&&a)return c===a?c:"conflict";return"partial";}
+function render(){
+  const q=document.getElementById("q").value.toLowerCase();
+  const ft=document.getElementById("ftype").value;
+  const fd=document.getElementById("fdec").value;
+  const t={n:DATA.length,agr:0,cf:0,und:0,done:0};const divset=new Set();const lvset=new Set();
+  DATA.forEach(d=>{divset.add(d.div);lvset.add(d.lv);if(d.done)t.done++;
+    if(d.cdec&&d.adec&&d.cdec===d.adec)t.agr++;
+    if(d.cdec&&d.adec&&d.cdec!==d.adec)t.cf++;
+    if(!d.cdec&&!d.adec)t.und++;});
+  document.getElementById("mTotal").textContent=t.n;
+  document.getElementById("stItems").textContent=t.n;
+  document.getElementById("stItemsSub").textContent="across "+lvset.size+" levels · "+divset.size+" divisions";
+  document.getElementById("stAgree").textContent=t.agr;
+  document.getElementById("stConf").textContent=t.cf;
+  document.getElementById("stUnd").textContent=t.und;
+  let rows=DATA.filter(d=>{
+    if(ft&&d.div!==ft)return false;
+    if(fd==="conflict"&&!(d.cdec&&d.adec&&d.cdec!==d.adec))return false;
+    if(fd==="undecided"&&(d.cdec||d.adec))return false;
+    if(fd==="agreed"&&!(d.cdec&&d.cdec===d.adec))return false;
+    if(fd==="completed"&&!d.done)return false;
+    if(q){const hay=(d.no+" "+d.lv+" "+d.div+" "+d.desc+" "+d.loc+" "+d.src+" "+d.snote+" "+d.cnote+" "+d.anote).toLowerCase();if(!hay.includes(q))return false;}
+    return true;});
+  const levels={};
+  rows.forEach(d=>{(levels[d.lv]=levels[d.lv]||{ord:d.ord??99,divs:{}}).divs[d.div]=levels[d.lv].divs[d.div]||[],levels[d.lv].divs[d.div].push(d);});
+  const lvNames=Object.keys(levels).sort((a,b)=>(levels[a].ord-levels[b].ord)||a.localeCompare(b));
+  const C=document.getElementById("groups");
+  if(!lvNames.length){C.innerHTML='<p style="color:var(--sb-muted);padding:20px">No items match the filters.</p>';buildLists();return;}
+  C.innerHTML=lvNames.map(lv=>{
+    const L=levels[lv];let items=0,agr=0;
+    const divNames=Object.keys(L.divs).sort((a,b)=>divKey(a).localeCompare(divKey(b)));
+    const body=divNames.map(dv=>{
+      const list=L.divs[dv];const _p=dv.split("—");const code=_p[0].trim();const dname=_p.slice(1).join("—").trim();
+      const cards=list.map(d=>{items++;if(d.cdec&&d.cdec===d.adec)agr++;return card(d);}).join("");
+      return `<div class="div-group"><div class="div-h"><span class="code">${esc(code||"—")}</span><span class="dname">${esc(dname||dv)}</span></div>${cards}</div>`;
+    }).join("");
+    return `<div class="level" data-lv="${esc(lv)}"><div class="level-h" onclick="toggleLevel(this)">
+      <span class="chev">▾</span><span class="name">${esc(lv)}</span>
+      <span class="meta">${divNames.length} division${divNames.length>1?"s":""}</span>
+      <span class="lp"><span class="pill">${items} item${items>1?"s":""}</span><span class="pill" style="background:rgba(34,197,94,.32)">${agr} both agree</span></span>
+      </div><div class="level-body">${body}
+      <div class="add-here"><button onclick="openAdd('${esc(lv)}')">+ Add item to ${esc(lv)}</button></div></div></div>`;
+  }).join("");
+  buildLists();
+}
+function segHtml(d,who){const v=who==="c"?d.cdec:d.adec;
+  return `<div class="seg">
+    <button class="accept ${v==='accept'?'on':''}" onclick="setDec('${d.id}','${who}','accept')">Accept</button>
+    <button class="reject ${v==='reject'?'on':''}" onclick="setDec('${d.id}','${who}','reject')">Reject</button>
+    <button class="hold ${v==='hold'?'on':''}" onclick="setDec('${d.id}','${who}','hold')">Hold</button></div>`;}
+function card(d){
+  const done=d.done?'<span class="tag done">✓ Completed</span>':'';
+  const dcode=(d.div||"").split("—")[0].trim();
+  const cstamp=d.cdec?`<div class="stamp">${esc(d.cby||"—")}${d.cdt?" · "+d.cdt:""}</div>`:"";
+  const astamp=d.adec?`<div class="stamp">${esc(d.aby||"—")}${d.adt?" · "+d.adt:""}</div>`:"";
+  const sn=`<div class="snrow"><span class="ll">Singular note</span><span class="sv2" contenteditable spellcheck="false" oninput="edit('${d.id}','snote',this.innerText)">${esc(d.snote||"—")}</span></div>`;
+  return `<div class="item" data-d="${aggState(d)}" data-id="${d.id}"><div class="mn">
+    <div class="tagrow"><span class="tag dv">Div ${esc(dcode)}</span><span class="tag no">Item ${esc(d.no||"—")}</span>${done}</div>
+    <div class="desc" contenteditable spellcheck="false" oninput="edit('${d.id}','desc',this.innerText)">${esc(d.desc)}</div>
+    <div class="locrow"><span class="ll">Location</span><span class="lv2" contenteditable spellcheck="false" oninput="edit('${d.id}','loc',this.innerText)">${esc(d.loc||"—")}</span></div>
+    <details class="src"><summary></summary><div class="why" contenteditable spellcheck="false" oninput="edit('${d.id}','src',this.innerText)">${esc(d.src||"—")}</div></details>
+    ${sn}
+    <div class="rowtools"><button class="lnk" onclick="editItem('${d.id}')">Edit details</button><button class="lnk del" onclick="delItem('${d.id}')">Delete</button></div>
+    </div><div class="side">
+    <div class="dec-block"><div class="nlab2">Client decision</div>${segHtml(d,'c')}${cstamp}
+      <textarea class="notes" placeholder="Client notes…" oninput="edit('${d.id}','cnote',this.value)">${esc(d.cnote)}</textarea></div>
+    <div class="dec-block"><div class="nlab2">Architect decision</div>${segHtml(d,'a')}${astamp}
+      <textarea class="notes" placeholder="Architect notes…" oninput="edit('${d.id}','anote',this.value)">${esc(d.anote)}</textarea></div>
+    </div></div>`;
+}
+function find(id){return DATA.find(d=>d.id===id);}
+let saveTimers={};
+function edit(id,f,v){const d=find(id);if(!d)return;d[f]=v;clearTimeout(saveTimers[id]);saveTimers[id]=setTimeout(()=>pushS(d),400);}
+function setDec(id,who,v){const d=find(id);if(!d)return;const dk=who+"dec",bk=who+"by",tk=who+"dt";
+  if(d[dk]===v){d[dk]="";}else{d[dk]=v;d[bk]=getInit();d[tk]=new Date().toISOString().slice(0,10);}
+  pushS(d);render();}
+function toggleLevel(h){h.parentElement.classList.toggle("collapsed");}
+async function delItem(id){const d=find(id);if(!d)return;if(!confirm("Delete this scope item?\n\n"+d.desc))return;DATA=DATA.filter(x=>x.id!==id);cacheS();render();if(LIVE){try{await sb.from("scope_items").delete().eq("id",id);}catch(e){console.error(e);}}}
+let editingId=null;
+function openAdd(lv){editingId=null;document.getElementById("mTitle").innerText="Add scope item";buildLists();
+  document.getElementById("mNo").value="";document.getElementById("mLevel").value=lv||"";document.getElementById("mDiv").value="";document.getElementById("mDesc").value="";document.getElementById("mLoc").value="";document.getElementById("mSrc").value="";document.getElementById("mDone").checked=false;
+  document.getElementById("modal").classList.add("show");document.getElementById("mDesc").focus();}
+function editItem(id){const d=find(id);if(!d)return;editingId=id;document.getElementById("mTitle").innerText="Edit scope item";buildLists();
+  document.getElementById("mNo").value=d.no||"";document.getElementById("mLevel").value=d.lv;document.getElementById("mDiv").value=d.div;document.getElementById("mDesc").value=d.desc;document.getElementById("mLoc").value=d.loc||"";document.getElementById("mSrc").value=d.src||"";document.getElementById("mDone").checked=!!d.done;
+  document.getElementById("modal").classList.add("show");}
+function closeModal(){document.getElementById("modal").classList.remove("show");}
+async function saveModal(){
+  const no=document.getElementById("mNo").value.trim();
+  const lv=document.getElementById("mLevel").value.trim()||"Unassigned";
+  const div=document.getElementById("mDiv").value.trim()||"09 — Finishes";
+  const desc=document.getElementById("mDesc").value.trim();
+  const loc=document.getElementById("mLoc").value.trim();
+  const src=document.getElementById("mSrc").value.trim();
+  const done=document.getElementById("mDone").checked;
+  if(!desc){alert("Please enter a scope description.");return;}
+  if(editingId){const d=find(editingId);Object.assign(d,{no,lv,div,desc,loc,src,done,ord:d.ord??lvOrder(lv)});pushS(d);}
+  else{const item={no,lv,ord:lvOrder(lv),pos:DATA.length,div,desc,loc,src,done,snote:"",cdec:"",cby:"",cdt:"",cnote:"",adec:"",aby:"",adt:"",anote:""};
+    if(LIVE){try{const {data}=await sb.from("scope_items").insert(toS(item)).select();if(data&&data[0]){const m=mapS(data[0]);if(!DATA.find(x=>x.id===m.id))DATA.push(m);}}catch(e){console.error(e);}}
+    else{item.id="u"+Date.now();DATA.push(item);cacheS();}}
+  sortS();closeModal();render();
+}
+function lvOrder(lv){const ex=DATA.find(d=>d.lv===lv);return ex?ex.ord:50;}
+function buildLists(){
+  const lvs=[...new Set(DATA.map(d=>d.lv))];
+  const dvs=[...new Set(DATA.map(d=>d.div))].sort((a,b)=>divKey(a).localeCompare(divKey(b)));
+  document.getElementById("levelList").innerHTML=lvs.map(v=>`<option value="${esc(v)}">`).join("");
+  document.getElementById("divList").innerHTML=dvs.map(v=>`<option value="${esc(v)}">`).join("");
+  const sel=document.getElementById("ftype");const cur=sel.value;
+  sel.innerHTML='<option value="">All divisions</option>'+dvs.map(v=>`<option${v===cur?" selected":""}>${esc(v)}</option>`).join("");
+}
+function exportCSV(){
+  const head=["Item No.","Level","Division","Scope description","Location","Source / reference","Completed","Client decision","Client by","Client date","Client notes","Architect decision","Architect by","Architect date","Architect notes","Singular notes"];
+  const rows=[...DATA].sort((a,b)=>(a.ord-b.ord)||((a.pos??0)-(b.pos??0)))
+    .map(d=>[d.no,d.lv,d.div,d.desc,d.loc,d.src,d.done?"Yes":"",d.cdec||"undecided",d.cby,d.cdt,d.cnote,d.adec||"undecided",d.aby,d.adt,d.anote,d.snote].map(v=>'"'+String(v||"").replace(/"/g,'""')+'"').join(","));
+  dl("Curran_Scope_Matrix4.csv",[head.join(","),...rows].join("\r\n"),"text/csv");
+}
+
+function dl(name,content,type){const b=new Blob([content],{type});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();URL.revokeObjectURL(a.href);}
+
+document.getElementById("q").addEventListener("input",render);
+document.getElementById("ftype").addEventListener("change",render);
+document.getElementById("fdec").addEventListener("change",render);
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+boot();
+</script>
+</body>
+</html>
